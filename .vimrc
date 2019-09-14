@@ -23,7 +23,7 @@ syntax on
 " 24bit颜色
 set termguicolors
 " 背景颜色黑色
-set background = dark
+set background=dark
 " 设置颜色主题
 "colorscheme molokai
 colorscheme one
@@ -37,16 +37,16 @@ set autoindent
 set cindent
 " Tab键的宽度
 " 统一缩进为4
-set tabstop = 4
-set softtabstop = 4
-set shiftwidth = 4
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
 " 用空格代替制表符
 set expandtab
 set autoindent
 " 显示行号
 set number
 " 历史记录数
-set history = 100
+set history=100
 " 搜索忽略大小写
 set ignorecase
 " 搜索逐字符高亮
@@ -66,15 +66,15 @@ filetype indent on
 " 增强模式中的命令行自动完成操作
 set wildmenu
 " 使回格键（backspace）正常处理indent, eol, start等
-set backspace = 2
+set backspace=2
 " 允许backspace和光标键跨越行边界
-set whichwrap += <,>,h,l
+set whichwrap+=<,>,h,l
 " 设置退格键
-set backspace = indent,eol,start
+set backspace=indent,eol,start
 " 高亮显示匹配的括号
 set showmatch
 " 匹配括号高亮的时间（单位是十分之一秒）
-set matchtime = 5
+set matchtime=5
 " 设置智能缩进
 set smartindent
 "高亮光标所在行
@@ -82,23 +82,23 @@ set cursorline
 " 关闭遇到错误时的声音提示
 set noerrorbells
 " 编码设置
-set enc = utf-8
-set fencs = utf-8,gbk,gb2312
-set fenc = utf-8
+set enc=utf-8
+set fencs=utf-8,gbk,gb2312
+set fenc=utf-8
 
 " clang-format格式化代码
-let g:clang_format#auto_format_on_insert_leave = 1
-let g:clang_format = 1
+let g:clang_format#auto_format_on_insert_leave=1
+let g:clang_format=1
 autocmd FileType c,cpp,proto nnoremap <buffer><Leader>cf :<C-l>ClangFormat<CR>
 autocmd FileType c,cpp,proto vnoremap <buffer><Leader>cf :ClangFormat<CR>
 
 " NERDTree设置
 map <Leader>nd :NERDTreeMirror<CR>
 map <Leader>nd :NERDTreeToggle<CR>
-let g:nerdtree_tabs_open_on_console_startup = 1
-let NERDTreeIgnore = ['\~$','\.swp']
-let NERDTreeShowHidden = 1
-let g:NERDTreeIndicatorMapCustom = {
+let g:nerdtree_tabs_open_on_console_startup=1
+let NERDTreeIgnore=['\~$','\.swp']
+let NERDTreeShowHidden=1
+let g:NERDTreeIndicatorMapCustom={
     \ "Modified"  : "✹",
     \ "Staged"    : "✚",
     \ "Untracked" : "✭",
@@ -111,13 +111,13 @@ let g:NERDTreeIndicatorMapCustom = {
     \ }
 
 " 设置airline主题
-let g:airline_theme = 'minimalist'
+let g:airline_theme='minimalist'
 
 " gitgutter
-let g:gitgutter_enabled = 1
-let g:gitgutter_signs = 1
-let g:gitgutter_highlight_lines = 1
-let g:gitgutter_highlight_linenrs = 1
-let g:gitgutter_async = 0
+let g:gitgutter_enabled=1
+let g:gitgutter_signs=1
+let g:gitgutter_highlight_lines=1
+let g:gitgutter_highlight_linenrs=1
+let g:gitgutter_async=0
 set updatetime=100
 autocmd BufWritePost * GitGutter
