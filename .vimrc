@@ -131,3 +131,4 @@ inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 let g:ycm_key_list_select_completion = ['<Down>']
 let g:ycm_key_list_previous_completion = ['<Up>']
+let g:ycm_global_ycm_extra_conf= '~/.vim/.ycm_extra_conf.py'
