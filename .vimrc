@@ -11,6 +11,9 @@ Plug 'honza/vim-snippets'
 Plug 'rhysd/vim-clang-format'
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'fatih/vim-go'
+Plug 'dgryski/vim-godef'
+Plug 'Blackrush/vim-gocode'
+Plug 'Valloric/YouCompleteMe'
 call plug#end()
 " 不要使用vi的键盘模式，而是vim自己的
 set nocompatible
@@ -121,3 +124,10 @@ let g:gitgutter_highlight_linenrs=1
 let g:gitgutter_async=0
 set updatetime=100
 autocmd BufWritePost * GitGutter
+
+" YouCompleteMe
+set completeopt=longest,menu
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
+autocmd InsertLeave * if pumvisible() == 0|pclose|endif
+let g:ycm_key_list_select_completion = ['<Down>']
+let g:ycm_key_list_previous_completion = ['<Up>']
