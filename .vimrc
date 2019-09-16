@@ -89,7 +89,7 @@ set enc=utf-8
 set fencs=utf-8,gbk,gb2312
 set fenc=utf-8
 
-" 退出时记住weizhi
+" 退出时记住位置
 autocmd BufReadPost *
     \ if line("'\"")>0&&line("'\"")<=line("$") |
     \   exe "normal g'\"" |
