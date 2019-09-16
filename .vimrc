@@ -89,6 +89,12 @@ set enc=utf-8
 set fencs=utf-8,gbk,gb2312
 set fenc=utf-8
 
+" 退出时记住weizhi
+autocmd BufReadPost *
+    \ if line("'\"")>0&&line("'\"")<=line("$") |
+    \   exe "normal g'\"" |
+    \ endif
+
 " clang-format格式化代码
 let g:clang_format#auto_format_on_insert_leave=1
 let g:clang_format=1
@@ -119,8 +125,8 @@ let g:airline_theme='minimalist'
 " gitgutter
 let g:gitgutter_enabled=1
 let g:gitgutter_signs=1
-let g:gitgutter_highlight_lines=1
-let g:gitgutter_highlight_linenrs=1
+let g:gitgutter_highlight_lines=0
+let g:gitgutter_highlight_linenrs=0
 let g:gitgutter_async=0
 set updatetime=100
 autocmd BufWritePost * GitGutter
