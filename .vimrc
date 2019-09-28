@@ -86,7 +86,7 @@ set cursorline
 set noerrorbells
 " 编码设置
 set enc=utf-8
-set fencs=utf-8,gbk,gb2312
+set fencs=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936
 set fenc=utf-8
 
 " 退出时记住位置
@@ -96,8 +96,8 @@ autocmd BufReadPost *
     \ endif
 
 " clang-format格式化代码
-let g:clang_format#auto_format_on_insert_leave=1
-let g:clang_format=1
+"let g:clang_format#auto_format_on_insert_leave=1
+"let g:clang_format=1
 autocmd FileType c,cpp,proto nnoremap <buffer><Leader>cf :<C-l>ClangFormat<CR>
 autocmd FileType c,cpp,proto vnoremap <buffer><Leader>cf :ClangFormat<CR>
 
