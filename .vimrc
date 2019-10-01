@@ -40,9 +40,9 @@ set autoindent
 set cindent
 " Tab键的宽度
 " 统一缩进为4
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
 " 用空格代替制表符
 set expandtab
 set autoindent
@@ -96,8 +96,8 @@ autocmd BufReadPost *
     \ endif
 
 " clang-format格式化代码
-"let g:clang_format#auto_format_on_insert_leave=1
-"let g:clang_format=1
+let g:clang_format#auto_format_on_insert_leave=1
+let g:clang_format=1
 autocmd FileType c,cpp,proto nnoremap <buffer><Leader>cf :<C-l>ClangFormat<CR>
 autocmd FileType c,cpp,proto vnoremap <buffer><Leader>cf :ClangFormat<CR>
 
