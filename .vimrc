@@ -39,7 +39,7 @@ set autoindent
 " 使用c语言的缩进
 set cindent
 " Tab键的宽度
-" 统一缩进为4
+" 统一缩进为2
 set tabstop=2
 set softtabstop=2
 set shiftwidth=2
