@@ -14,6 +14,8 @@ Plug 'fatih/vim-go'
 Plug 'dgryski/vim-godef'
 Plug 'Blackrush/vim-gocode'
 Plug 'Valloric/YouCompleteMe'
+Plug 'google/vim-maktaba'
+Plug 'bazelbuild/vim-bazel'
 call plug#end()
 " 不要使用vi的键盘模式，而是vim自己的
 set nocompatible
