@@ -91,6 +91,17 @@ set enc=utf-8
 set fencs=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936
 set fenc=utf-8
 
+" 快捷键配置
+nmap <Up> <nop>
+imap <Up> <nop>
+nmap <Down> <nop>
+imap <Down> <nop>
+nmap <Left> <nop>
+imap <Left> <nop>
+nmap <Right> <nop>
+imap <Right> <nop>
+imap jj <Esc>
+
 " 退出时记住位置
 autocmd BufReadPost *
     \ if line("'\"")>0&&line("'\"")<=line("$") |
