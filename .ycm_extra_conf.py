@@ -85,7 +85,8 @@ get_python_inc(),
 'cpp/ycm/tests/gmock/include',
 '-isystem',
 'cpp/ycm/benchmarks/benchmark/include',
-'-I', '/home/buwan/QQMail',
+'-I', '/home/blinkchen/wwlocal',
+'-I', '/home/blinkchen/wwlocal/bazel-genfiles',
 ]
 
 # Clang automatically sets the '-std=' flag to 'c++14' for MSVC 2015 or later,
