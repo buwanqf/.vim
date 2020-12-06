@@ -8,7 +8,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'mhinz/vim-signify'
 
-Plug 'Valloric/YouCompleteMe'
+"Plug 'Valloric/YouCompleteMe'
 Plug 'dense-analysis/ale'
 
 Plug 'SirVer/ultisnips'
@@ -30,6 +30,11 @@ syntax enable
 syntax on
 " 24bit颜色
 set termguicolors
+set termguicolors
+if &term =~# '^screen'
+    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+endif
 " 背景颜色黑色
 set background=dark
 " 设置颜色主题
@@ -44,10 +49,10 @@ set autoindent
 " 使用c语言的缩进
 set cindent
 " Tab键的宽度
-" 统一缩进为2
-set tabstop=2
-set softtabstop=2
-set shiftwidth=2
+" 统一缩进为4
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
 " 用空格代替制表符
 set expandtab
 set autoindent
@@ -95,14 +100,6 @@ set fencs=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936
 set fenc=utf-8
 
 " 快捷键配置
-nmap <Up> <nop>
-imap <Up> <nop>
-nmap <Down> <nop>
-imap <Down> <nop>
-nmap <Left> <nop>
-imap <Left> <nop>
-nmap <Right> <nop>
-imap <Right> <nop>
 imap jj <Esc>
 
 " 退出时记住位置
@@ -112,7 +109,8 @@ autocmd BufReadPost *
     \ endif
 
 " clang-format格式化代码
-let g:clang_format#auto_format=1
+let g:clang_format#command="/opt/rh/llvm-toolset-7/root/bin/clang-format"
+let g:clang_format#auto_format=0
 let g:clang_format=1
 autocmd FileType c,cpp,proto nnoremap <buffer><Leader>cf :<C-l>ClangFormat<CR>
 autocmd FileType c,cpp,proto vnoremap <buffer><Leader>cf :ClangFormat<CR>
