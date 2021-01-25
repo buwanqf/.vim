@@ -8,9 +8,6 @@ Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'mhinz/vim-signify'
 
-"Plug 'Valloric/YouCompleteMe'
-Plug 'dense-analysis/ale'
-
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'rhysd/vim-clang-format'
@@ -136,43 +133,3 @@ let g:NERDTreeIndicatorMapCustom={
 " 设置airline主题
 let g:airline_theme='minimalist'
 
-" YouCompleteMe
-set completeopt=menu,menuone,longest
-inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
-autocmd InsertLeave * if pumvisible() == 0|pclose|endif
-let g:ycm_global_ycm_extra_conf='~/.vim/.ycm_extra_conf.py'
-let g:ycm_add_preview_to_completeopt=0
-let g:ycm_show_diagnostics_ui=0
-let g:ycm_key_invoke_completion='<c-l>'
-noremap <c-l> <NOP>
-let g:ycm_key_list_select_completion = ['<Down>']
-let g:ycm_key_list_previous_completion = ['<Up>']
-let g:ycm_min_num_identifier_candidate_chars=2
-let g:ycm_semantic_triggers={
-    \ 'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
-    \ 'cs,lua,javascript': ['re!\w{2}'],
-    \ }
-let g:ycm_collect_identifiers_from_comments_and_strings=1
-let g:ycm_complete_in_strings=1
-
-" dense-analysis/ale
-let g:ale_linters_explicit = 1
-let g:ale_completion_delay = 500
-let g:ale_echo_delay = 20
-let g:ale_lint_delay = 500
-let g:ale_echo_msg_format = '[%linter%] %code: %%s'
-let g:ale_lint_on_text_changed = 'normal'
-let g:ale_lint_on_insert_leave = 1
-let g:airline#extensions#ale#enabled = 1
-
-let g:ale_c_gcc_options = '-Wall -O2 -std=c99'
-let g:ale_cpp_gcc_options = '-Wall -O2 -std=c++14'
-let g:ale_c_cppcheck_options = ''
-let g:ale_cpp_cppcheck_options = ''
-let g:ale_sign_error = "\ue009\ue009"
-hi! clear SpellBad
-hi! clear SpellCap
-hi! clear SpellRare
-hi! SpellBad gui=undercurl guisp=red
-hi! SpellCap gui=undercurl guisp=blue
-hi! SpellRare gui=undercurl guisp=magenta
