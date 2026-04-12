@@ -1,32 +1,27 @@
 call plug#begin('~/.vim/plugged')
 Plug 'tomasr/molokai'
 Plug 'rakr/vim-one'
+Plug 'joshdick/onedark.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
-Plug 'scrooloose/nerdtree'
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'mhinz/vim-signify'
-
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
-Plug 'rhysd/vim-clang-format'
 Plug 'octol/vim-cpp-enhanced-highlight'
 
-Plug 'fatih/vim-go'
-Plug 'dgryski/vim-godef'
-Plug 'Blackrush/vim-gocode'
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
+
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
+
+" 设置 Leader 键
+let mapleader = "`"
 " 不要使用vi的键盘模式，而是vim自己的
 set nocompatible
 " 显示命令提示
 set showcmd
-" 语言色彩
-syntax enable
 " 语法高亮
 syntax on
 " 24bit颜色
-set termguicolors
 set termguicolors
 if &term =~# '^screen'
     let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
@@ -35,62 +30,53 @@ endif
 " 背景颜色黑色
 set background=dark
 " 设置颜色主题
-"colorscheme molokai
 colorscheme one
-" 去掉输入错误的提示声音
-set noeb
+"colorscheme onedark
+" 关闭错误提示声音
+set noerrorbells
 " 在处理未保存或只读文件的时候，弹出确认
 set confirm
-" 自动缩进
+" 缩进设置
 set autoindent
-" 使用c语言的缩进
 set cindent
-" Tab键的宽度
-" 统一缩进为4
+set smartindent
+" 统一缩进为2
 set tabstop=2
 set softtabstop=2
 set shiftwidth=2
 " 用空格代替制表符
 set expandtab
-set autoindent
 " 显示行号
 set number
 " 历史记录数
 set history=100
-" 搜索忽略大小写
+" 搜索设置
 set ignorecase
-" 搜索逐字符高亮
+set smartcase
 set hlsearch
-" 忽略大小写搜索
 set incsearch
 " 行内替换
 set gdefault
-" 在编辑过程中，在右下角显示光标位置的状态行
+" 在右下角显示光标位置
 set ruler
 " 侦测文件类型
 filetype on
-" 载入文件类型插件
 filetype plugin on
-" 为特定文件类型载入相关缩进文件
 filetype indent on
-" 增强模式中的命令行自动完成操作
+" 命令行自动完成
 set wildmenu
-" 使回格键（backspace）正常处理indent, eol, start等
-set backspace=2
-" 允许backspace和光标键跨越行边界
-set whichwrap+=<,>,h,l
+" 允许切换 buffer 时不强制保存
+set hidden
 " 设置退格键
 set backspace=indent,eol,start
+" 允许光标键跨越行边界
+set whichwrap+=<,>,h,l
 " 高亮显示匹配的括号
 set showmatch
 " 匹配括号高亮的时间（单位是十分之一秒）
 set matchtime=5
-" 设置智能缩进
-set smartindent
-"高亮光标所在行
+" 高亮光标所在行
 set cursorline
-" 关闭遇到错误时的声音提示
-set noerrorbells
 " 编码设置
 set enc=utf-8
 set fencs=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936
@@ -105,33 +91,71 @@ autocmd BufReadPost *
     \   exe "normal g'\"" |
     \ endif
 
-" clang-format格式化代码
-let g:clang_format#command="/usr/local/bin/clang-format"
-let g:clang_format#auto_format=0
-let g:clang_format=1
-autocmd FileType c,cpp,proto nnoremap <buffer><Leader>cf :<C-l>ClangFormat<CR>
-autocmd FileType c,cpp,proto vnoremap <buffer><Leader>cf :ClangFormat<CR>
-
-" NERDTree设置
-map <Leader>nd :NERDTreeMirror<CR>
-map <Leader>nd :NERDTreeToggle<CR>
-let g:nerdtree_tabs_open_on_console_startup=1
-let NERDTreeIgnore=['\~$','\.swp']
-let NERDTreeShowHidden=1
-let g:NERDTreeGitStatusIndicatorMapCustom={
-    \ "Modified"  : "✹",
-    \ "Staged"    : "✚",
-    \ "Untracked" : "✭",
-    \ "Renamed"   : "➜",
-    \ "Unmerged"  : "═",
-    \ "Deleted"   : "✖",
-    \ "Dirty"     : "✗",
-    \ "Clean"     : "✔︎",
-    \ "Unknown"   : "?"
-    \ }
-
 " 设置airline主题
 let g:airline_theme='minimalist'
+" 顶部显示 buffer 标签栏
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail'
 
+" --- Buffer 切换 ---
+nnoremap <Leader>] :bn<CR>
+nnoremap <Leader>[ :bp<CR>
+nnoremap <Leader>q :bd<CR>
+
+" --- FZF ---
+nnoremap <Leader>p :Files<CR>
+nnoremap <Leader>b :Buffers<CR>
+nnoremap <Leader>s :Rg<CR>
+nnoremap <Leader>h :History<CR>
 
 source ~/.vim/format.vim
+
+" ============================================================
+" coc.nvim 配置
+" ============================================================
+
+" Tab 补全导航
+inoremap <silent><expr> <TAB>
+    \ coc#pum#visible() ? coc#pum#next(1) :
+    \ CheckBackspace() ? "\<Tab>" :
+    \ coc#refresh()
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+
+" 回车确认补全
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+    \ : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+function! CheckBackspace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" 跳转
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" K 查看文档
+nnoremap <silent> K :call ShowDocumentation()<CR>
+function! ShowDocumentation()
+  if CocAction('hasProvider', 'hover')
+    call CocActionAsync('doHover')
+  else
+    call feedkeys('K', 'in')
+  endif
+endfunction
+
+" 诊断跳转
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" 重命名
+nmap <Leader>rn <Plug>(coc-rename)
+
+" 格式化选中区域
+xmap <Leader>f <Plug>(coc-format-selected)
+nmap <Leader>f <Plug>(coc-format-selected)
+
+" 格式化整个文件
+nmap <Leader>F :call CocActionAsync('format')<CR>

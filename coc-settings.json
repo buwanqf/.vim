@@ -1,0 +1,13 @@
+{
+  "languageserver": {
+    "clangd": {
+      "command": "/home/mmdev/clang/bin/clangd",
+      "args": ["--background-index", "--clang-tidy", "--completion-style=detailed"],
+      "filetypes": ["c", "cpp", "objc", "objcpp"],
+      "rootPatterns": ["compile_commands.json", ".git/"],
+      "initializationOptions": {
+        "compilationDatabasePath": "/data/home/blinkchen/QQMail"
+      }
+    }
+  }
+}
